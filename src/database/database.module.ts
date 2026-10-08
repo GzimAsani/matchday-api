@@ -4,6 +4,7 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import type { Env } from '../config/env.js';
 import { DB, PG_CLIENT, type Database, type PgClient } from './database.js';
+import * as schema from './schema.js';
 
 // Global because nearly every feature module needs the database.
 @Global()
@@ -18,7 +19,8 @@ import { DB, PG_CLIENT, type Database, type PgClient } from './database.js';
     {
       provide: DB,
       inject: [PG_CLIENT],
-      useFactory: (client: PgClient): Database => drizzle({ client }),
+      useFactory: (client: PgClient): Database =>
+        drizzle({ client, schema, casing: 'snake_case' }),
     },
   ],
   exports: [DB],
