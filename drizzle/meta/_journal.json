@@ -15,6 +15,20 @@
       "when": 1791468407072,
       "tag": "0001_add_competition_emblem",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791541155876,
+      "tag": "0002_add_match_winner",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791541275267,
+      "tag": "0003_add_match_winner",
+      "breakpoints": true
     }
   ]
 }

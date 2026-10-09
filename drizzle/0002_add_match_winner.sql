@@ -1,0 +1,1 @@
+CREATE TYPE "public"."match_winner" AS ENUM('home', 'away', 'draw');

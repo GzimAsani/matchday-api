@@ -1,8 +1,12 @@
-import type { dataProvider, matchStatus } from '../database/schema.js';
+import type {
+  dataProvider,
+  matchStatus,
+  matchWinner,
+} from '../database/schema.js';
 
 export type DataProvider = (typeof dataProvider.enumValues)[number];
 export type MatchStatus = (typeof matchStatus.enumValues)[number];
-export type MatchWinner = 'home' | 'away' | 'draw';
+export type MatchWinner = (typeof matchWinner.enumValues)[number];
 
 // The one shape every provider adapter returns. The sync job only sees this,
 // never a provider's own format.

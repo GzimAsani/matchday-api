@@ -26,6 +26,8 @@ export const matchStatus = pgEnum('match_status', [
   'cancelled',
 ]);
 
+export const matchWinner = pgEnum('match_winner', ['home', 'away', 'draw']);
+
 const timestamps = {
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp({ withTimezone: true })
@@ -89,6 +91,7 @@ export const matches = pgTable(
     // Null until the match starts: no score is not the same as 0-0.
     homeScore: integer(),
     awayScore: integer(),
+    winner: matchWinner(),
     ...timestamps,
   },
   (t) => [
