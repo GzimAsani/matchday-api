@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import type {
   FootballDataProvider,
   MatchStatus,
+  MatchWinner,
   ProviderMatch,
   ProviderTeam,
 } from '../provider.types.js';
@@ -54,6 +55,7 @@ export function toProviderMatch(
     status,
     homeScore: score?.home ?? null,
     awayScore: score?.away ?? null,
+    winner: status === 'finished' && score ? toWinner(score) : null,
   };
 }
 
@@ -78,6 +80,13 @@ function currentScore(match: OpenLigaMatch): { home: number; away: number } {
   const lastGoal = (match.goals ?? []).at(-1);
   if (lastGoal) return { home: lastGoal.scoreTeam1, away: lastGoal.scoreTeam2 };
   return { home: 0, away: 0 };
+}
+
+// The Bundesliga has no extra time or penalties, so the score decides.
+function toWinner(score: { home: number; away: number }): MatchWinner {
+  if (score.home > score.away) return 'home';
+  if (score.away > score.home) return 'away';
+  return 'draw';
 }
 
 function toTeam(team: OpenLigaTeam): ProviderTeam {

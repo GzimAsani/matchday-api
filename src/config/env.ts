@@ -9,6 +9,7 @@ export const envSchema = z.object({
     .default('development'),
   PORT: z.coerce.number().int().positive().default(3000),
   DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
+  FOOTBALL_DATA_API_KEY: z.string().min(1),
 });
 
 export type Env = z.infer<typeof envSchema>;

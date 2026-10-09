@@ -34,6 +34,7 @@ describe('toProviderMatch', () => {
       status: 'finished',
       homeScore: 5, // full time, not the 1-0 at half time
       awayScore: 1,
+      winner: 'home',
     });
   });
 
@@ -43,6 +44,7 @@ describe('toProviderMatch', () => {
     expect(match.status).toBe('scheduled');
     expect(match.homeScore).toBeNull();
     expect(match.awayScore).toBeNull();
+    expect(match.winner).toBeNull();
   });
 
   it('is live at 0-0 once kickoff has passed and nobody has scored', () => {
@@ -50,6 +52,7 @@ describe('toProviderMatch', () => {
 
     expect(match.status).toBe('live');
     expect([match.homeScore, match.awayScore]).toEqual([0, 0]);
+    expect(match.winner).toBeNull(); // not decided until full time
   });
 
   it('takes a live score from the latest goal', () => {
